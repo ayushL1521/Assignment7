@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Final test lab</title>
+    <script>
+      function generateTable() {
+        var rows = parseInt(document.getElementById("t1").value);
+        var cols = parseInt(document.getElementById("t2").value);
+
+        var table = document.createElement("table");
+        var tbody = document.createElement("tbody");
+
+        for (var i = 0; i < rows; i++) {
+          var row = document.createElement("tr");
+          for (var j = 0; j < cols; j++) {
+            var cell = document.createElement("td");
+            cell.appendChild(document.createTextNode("Row " + i + ", Col " + j));
+            row.appendChild(cell);
+          }
+          tbody.appendChild(row);
+        }
+
+        table.appendChild(tbody);
+        document.body.appendChild(table);
+
+        var buttonsDiv = document.createElement("div");
+        buttonsDiv.setAttribute("id", "buttonsDiv");
+
+        var addColumnButton = document.createElement("button");
+        addColumnButton.innerHTML = "Add Column";
+        addColumnButton.onclick = function () {
+          addColumn();
+        };
+        buttonsDiv.appendChild(addColumnButton);
+
+        var addRowButton = document.createElement("button");
+        addRowButton.innerHTML = "Add Row";
+        addRowButton.onclick = function () {
+          addRow();
+        };
+        buttonsDiv.appendChild(addRowButton);
+
+        document.body.appendChild(buttonsDiv);
+
+        document.getElementById("b1").disabled = true;
+        document.getElementById("t1").disabled = true;
+        document.getElementById("t2").disabled = true;
+      }
+
+      function addColumn() {
+        var table = document.querySelector("table");
+        var rows = table.querySelectorAll("tr");
+        for (var i = 0; i < rows.length; i++) {
+          var cell = document.createElement("td");
+          cell.appendChild(document.createTextNode("New Column"));
+          rows[i].appendChild(cell);
+        }
+      }
+
+      function addRow() {
+        var table = document.querySelector("table");
+        var newRow = document.createElement("tr");
+        var cols = table.querySelectorAll("tr")[0].children.length;
+
+        for (var j = 0; j < cols; j++) {
+          var cell = document.createElement("td");
+          cell.appendChild(document.createTextNode("New Row"));
+          newRow.appendChild(cell);
+        }
+
+        table.appendChild(newRow);
+      }
+    </script>
+  </head>
+  <body>
+    <font size="8" color="green">Final test lab</font><br /><br />
+    Number of rows: <input type="text" id="t1" /><br /><br />
+    Number of cols: <input type="text" id="t2" /><br /><br />
+
+    <button id="b1" onclick="generateTable()">Generate Table</button><br /><br />
+
+    <button id="b2" onclick="addColumn()">Add Column</button>
+
+    <button id="b3" onclick="addRow()">Add Row</button>
+  </body>
+</html>
